@@ -55,17 +55,19 @@ $('#highlight-button').click(function() {
         quill.keyboard.addBinding({
           key: ' ',
           shortKey: false,
-          offset:1,
+          format: ['summary'],
           handler: function(range) {
             
               quill.keyboard.addBinding({
               key: ' ',
               shortKey: false,
+              format: ['summary'],
               handler: function(range) {
                 quill.format('summary',false);
+                
               }
               });
-            return true;
+              return true;
         }
         });
         /*
