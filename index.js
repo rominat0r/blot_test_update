@@ -26,22 +26,36 @@ class HighlightBlot extends Inline {
 Quill.register(BoldBlot);
 Quill.register(ItalicBlot);
 Quill.register(HighlightBlot);
+var x;
+document.addEventListener("keydown", function(event) {
+   x = event.which;
+})
+
+
+
+
 var quill = new Quill('#editor-container');
+
+  
+  quill.keyboard.addBinding({
+    key: ' ',
+    format:['summary'],
+    handler: function(range, context) {
+      if(x == 32){
+        quill.format('summary',false);  
+      }
+      console.log( quill.getContents());
+      return true;
+    }
+  });
+
+
 quill.focus();
 
-/*
-var Delta = Quill.import('delta');
-var change = new Delta();
-  quill.on('text-change', function (delta) {
-      change = change.compose(delta);
-      console.log('Saving changes', quill.getContents());
-  });
-*/
 $('#bold-button').click(function() {
     quill.focus();
   quill.format('bold', true);
  
-
 });
 $('#italic-button').click(function() {
     quill.focus();
@@ -52,39 +66,7 @@ $('#highlight-button').click(function() {
 
         quill.format('summary',true);   
         quill.focus();
-        quill.keyboard.addBinding({
-          key: ' ',
-          shortKey: false,
-          format: ['summary'],
-          handler: function(range) {
-            
-              quill.keyboard.addBinding({
-              key: ' ',
-              shortKey: false,
-              format: ['summary'],
-              handler: function(range) {
-                quill.format('summary',false);
-                
-              }
-              });
-              return true;
-        }
-        });
-        /*
-        quill.on('text-change', function() {
-              
-          var length = quill.getLength();
-          var text = quill.getText(0, length);
-          var lastChar = text[text.length -2];
-          var beforelastChar = text[text.length -3];
-          if(lastChar == " " && beforelastChar == " "){
-              
-          quill.format('summary',false);
-          
-      }
-      });
-      */
-     
+      
 });
 $('#delta-button').click(function() {
     alert("Open console for delta");
