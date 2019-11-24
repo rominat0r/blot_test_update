@@ -31,26 +31,8 @@ Quill.register(HighlightBlot);
 
 var quill = new Quill('#editor-container');
 
-$( "#editor-container" ).click(function() 
-{
-    quill.focus();
-    var myrange = quill.getSelection();
-    var clickformat = quill.getContents(myrange.index,myrange.index);
-    var keyNames;
-    try
-{
-    keyNames = Object.keys(clickformat.ops[0].attributes);
-}
-    catch{
-    return true;
-}   
-    if(keyNames[0] == "summary")
-{
+$("#editor-container").on("click", "t-summary", function(){
     console.log("%cWorks!", "color: blue; font-size:15px;");
-}   else
-{
-    return true;
-};
 });
 
 quill.keyboard.addBinding
@@ -82,7 +64,7 @@ $('#highlight-button').click(function() {
 });
 
 $('#delta-button').click(function() {
-    alert("Open console for delta");
     console.log( quill.getContents());
 });
+
 }
